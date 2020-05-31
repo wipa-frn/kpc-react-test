@@ -1,44 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { Form } from 'react-bootstrap'
 
-// const critizenIdSchema = yup.object().shape({
-//   firstName: yup.string()    
-//     .min(2, 'This name is too short.')
-//     .max(50, 'This name is too long.')
-//     .required('This field is required.'),
-//   lastName: yup.string().required()
-//     .min(2, 'This name is too short.')
-//     .max(50, 'This name is too long.')
-//     .required('This field is required.'),
-// });
-const CitizenId = ({ name, value, onChange }) => {
+const CitizenId = ({ name, onChange, isValid }) => {
 
   const [fields , setFields] = useState([]);
-  const [citizenId , setCitizenId] = useState('');
 
-  
-  const setCitizenIdValue = (event, index) => {
+  const handleChange = (event, index) => {
     
     let newFields = fields 
     newFields[index] = event.target.value
 
     setFields(newFields);
-
-
-    console.log(fields,'fields')
-    // console.log(citizenId,'citizenId')
-    // onChange(name, citizenId);
+    onChange(name, newFields.join(''));
   }
-
-  useEffect(() => {
-    // let result = '';
-    // fields.forEach(field => {
-    //   result += field
-    //   setCitizenId(result);
-    // });
-
-    // console.log(citizenId,'citizenId')
-  });
 
   return ( 
     <div className="d-flex flex-wrap">
@@ -50,7 +24,7 @@ const CitizenId = ({ name, value, onChange }) => {
           name="citizen-id-1"
           maxLength="1" 
           value={fields[0]}
-          onChange={ event => setCitizenIdValue(event, 0)} 
+          onChange={ event => handleChange(event, 0)} 
           style={{ width: '35px'}}
         />
         <Form.Label> - </Form.Label>
@@ -60,7 +34,7 @@ const CitizenId = ({ name, value, onChange }) => {
           name="citizen-id-2"
           maxLength="4" 
           value={fields[1]}
-          onChange={ event => setCitizenIdValue(event, 1)}
+          onChange={ event => handleChange(event, 1)}
           style={{ width: '65px'}}
         />
         <Form.Label> - </Form.Label>
@@ -70,8 +44,8 @@ const CitizenId = ({ name, value, onChange }) => {
           name="citizen-id-3"
           maxLength="5" 
           value={fields[2]}
-          onChange={ event => setCitizenIdValue(event, 2)}
-          style={{ width: '75px'}}
+          onChange={ event => handleChange(event, 2)}
+          style={{ width: '80px'}}
         />
         <Form.Label> - </Form.Label>
         <Form.Control
@@ -80,7 +54,7 @@ const CitizenId = ({ name, value, onChange }) => {
           name="citizen-id-4"
           maxLength="2" 
           value={fields[3]}
-          onChange={ event => setCitizenIdValue(event, 3)}
+          onChange={ event => handleChange(event, 3)}
           style={{ width: '45px'}}
         />
         <Form.Label> - </Form.Label>
@@ -90,7 +64,7 @@ const CitizenId = ({ name, value, onChange }) => {
           name="citizen-id-5"
           maxLength="1" 
           value={fields[4]}
-          onChange={ event => setCitizenIdValue(event, 4)}
+          onChange={ event => handleChange(event, 4)}
           style={{ width: '35px'}}
         />
       </div>

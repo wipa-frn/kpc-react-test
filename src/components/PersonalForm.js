@@ -17,15 +17,17 @@ const personalSchema = yup.object().shape({
     .min(2, 'This name is too short.')
     .max(50, 'This name is too long.')
     .required('This field is required.'),
-  birthDay: yup.date(),
-    // .required('This field is required.'),
+  birthDay: yup.date()
+    .required('This field is required.'),
   nationality: yup.string(),
+  citizenId: yup.string()
+    .length(13),
+    // .matches(/[0-9]{13}$/i)
   gender: yup.string(),
   mobilePhone: yup.string(),
   passportNo: yup.string(),
   expectedSalary: yup.number()
     .moreThan(0)
-    .round('ceil')
     .required('This field is required.'),
 });
 
@@ -40,7 +42,13 @@ const PersonalForm = () => {
   return ( 
     <Formik
       validationSchema={personalSchema}
-      onSubmit={console.log}
+      onSubmit={(values, { setSubmitting }) => {
+        console.log(values)
+        // setTimeout(() => {
+        //   alert(JSON.stringify(values, null, 2));
+        //   setSubmitting(false);
+        // }, 400);
+      }}
       initialValues={{
         title: defaultData.titles[0],
         nationality: '',
@@ -89,11 +97,10 @@ const PersonalForm = () => {
                 name="firstName"
                 value={values.firstName}
                 onChange={handleChange}
-                isValid={touched.firstName && !errors.firstName}
                 isInvalid={errors.firstName}
               />
               {
-                isValid ? <Form.Control.Feedback/> : <Form.Control.Feedback type="invalid">{errors.firstName}</Form.Control.Feedback>
+                isValid ? null : <Form.Control.Feedback type="invalid">{errors.firstName}</Form.Control.Feedback>
               }
             </Col>
             <Col xs={12} lg={5}>
@@ -103,11 +110,10 @@ const PersonalForm = () => {
                   name="lastName"
                   value={values.lastName}
                   onChange={handleChange}
-                  isValid={touched.lastName && !errors.lastName}
                   isInvalid={errors.lastName}
                 />
                 {
-                  isValid ? <Form.Control.Feedback/> : <Form.Control.Feedback type="invalid">{errors.lastName}</Form.Control.Feedback>
+                  isValid ? null : <Form.Control.Feedback type="invalid">{errors.lastName}</Form.Control.Feedback>
                 }
             </Col>
           </Form.Row>
@@ -120,10 +126,11 @@ const PersonalForm = () => {
                   name="birthDay"
                   value={values.birthDay}
                   onChange={setFieldValue}
+                  isInvalid={errors.birthDay}
                 />
-                {
-                  isValid ? <Form.Control.Feedback/> : <Form.Control.Feedback type="invalid">{errors.birthDay}</Form.Control.Feedback>
-                }
+                {/* {
+                  isValid ? null : <Form.Control.Feedback type="invalid">{errors.birthDay}</Form.Control.Feedback>
+                } */}
               </div>
             </Col>
             <Col className="d-flex my-2 p-0" lg={7}>
@@ -152,6 +159,8 @@ const PersonalForm = () => {
               name="citizenId"
               value={values.citizenId}
               onChange={setFieldValue}
+              isValid={!errors.citizenId}
+
             />
           </Form.Row>
 
@@ -192,14 +201,13 @@ const PersonalForm = () => {
               <Form.Control
                 type="text"
                 placeholder="Passport No."
-                name="passport-no"
+                name="passportNo"
                 value={values.passportNo}
                 onChange={handleChange}
-                isValid={touched.passportNo && !errors.passportNo}
                 isInvalid={errors.passportNo}
               />
               {
-                isValid ? <Form.Control.Feedback/> : <Form.Control.Feedback type="invalid">{errors.passportNo}</Form.Control.Feedback>
+                isValid ? null : <Form.Control.Feedback type="invalid">{errors.passportNo}</Form.Control.Feedback>
               }
             </div>
           </Form.Row>
@@ -213,11 +221,10 @@ const PersonalForm = () => {
                 name="expectedSalary"
                 value={values.expectedSalary}
                 onChange={handleChange}
-                isValid={touched.expectedSalary && !errors.expectedSalary}
                 isInvalid={errors.expectedSalary}
               />
               {
-                isValid ? <Form.Control.Feedback/> : <Form.Control.Feedback type="invalid">{errors.expectedSalary}</Form.Control.Feedback>
+                isValid ? null : <Form.Control.Feedback type="invalid">{errors.expectedSalary}</Form.Control.Feedback>
               }
             </div>
             <Form.Label>THB</Form.Label>
