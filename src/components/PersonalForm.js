@@ -21,8 +21,7 @@ const personalSchema = yup.object().shape({
     .required('This field is required.'),
   nationality: yup.string(),
   citizenId: yup.string()
-    .length(13),
-    // .matches(/[0-9]{13}$/i)
+    .matches(/[0-9]{13}$/i,'Consists of 13 digits.'),
   gender: yup.string(),
   mobilePhone: yup.string(),
   passportNo: yup.string(),
@@ -53,6 +52,7 @@ const PersonalForm = () => {
         title: defaultData.titles[0],
         nationality: '',
         gender: '',
+        citizenId:'',
         passportNo: '',
       }}
     >
@@ -155,13 +155,15 @@ const PersonalForm = () => {
           </Form.Row> 
 
           <Form.Row>
-            <CitizenId
-              name="citizenId"
-              value={values.citizenId}
-              onChange={setFieldValue}
-              isValid={!errors.citizenId}
-
-            />
+            <div>
+              <CitizenId
+                name="citizenId"
+                value={values.citizenId}
+                onChange={setFieldValue}
+                isValid={!errors.citizenId}
+                errors={errors}
+              />
+            </div>
           </Form.Row>
 
           <Form.Row>
