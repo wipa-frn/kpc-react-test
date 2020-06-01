@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Form } from 'react-bootstrap'
 
-const CitizenId = ({ name, onChange, isValid, errors}) => {
+const CitizenId = ({ name, onChange, errors}) => {
 
   const [fields , setFields] = useState([]);
 
@@ -20,7 +20,7 @@ const CitizenId = ({ name, onChange, isValid, errors}) => {
       <div>
         <div className="d-flex">
           <Form.Control
-            className={`${!isValid ? 'border border-danger' : ''}`}
+            className={`${!!errors.citizenId ? 'border border-danger' : ''}`}
             type="text"
             placeholder="x"
             name="citizen-id-1"
@@ -31,7 +31,7 @@ const CitizenId = ({ name, onChange, isValid, errors}) => {
           />
           <Form.Label> - </Form.Label>
           <Form.Control
-            className={`${!isValid ? 'border border-danger' : ''}`}
+            className={`${!!errors.citizenId ? 'border border-danger' : ''}`}
             type="text"
             placeholder="xxxx"
             name="citizen-id-2"
@@ -42,7 +42,7 @@ const CitizenId = ({ name, onChange, isValid, errors}) => {
           />
           <Form.Label> - </Form.Label>
           <Form.Control
-            className={`${!isValid ? 'border border-danger' : ''}`}
+            className={`${!!errors.citizenId ? 'border border-danger' : ''}`}
             type="text"
             placeholder="xxxxx"
             name="citizen-id-3"
@@ -53,7 +53,7 @@ const CitizenId = ({ name, onChange, isValid, errors}) => {
           />
           <Form.Label> - </Form.Label>
           <Form.Control
-            className={`${!isValid ? 'border border-danger' : ''}`}
+            className={`${!!errors.citizenId ? 'border border-danger' : ''}`}
             type="text"
             placeholder="xx"
             name="citizen-id-4"
@@ -64,7 +64,7 @@ const CitizenId = ({ name, onChange, isValid, errors}) => {
           />
           <Form.Label> - </Form.Label>
           <Form.Control
-            className={`${!isValid ? 'border border-danger' : ''}`}
+            className={`${!!errors.citizenId ? 'border border-danger' : ''}`}
             type="text"
             placeholder="x"
             name="citizen-id-5"
@@ -76,7 +76,7 @@ const CitizenId = ({ name, onChange, isValid, errors}) => {
         </div>
       
         {
-          isValid ? null : <div className="invilid-text">{errors.citizenId}</div>
+          !!errors.citizenId && <div className="invilid-text">{errors.citizenId}</div>
         }
       </div>
     </div>
