@@ -8,9 +8,10 @@ export const createPersonal = (personal) => {
     personal: personal
   }
 }
-export const deletePersonal = () => {
+export const deletePersonal = (id) => {
   return {
-    type: CREATE,
-    text: 'Delete personal successfully'
+    type: DELETE,
+    text: 'Delete personal successfully',
+    id: id
   }
 }

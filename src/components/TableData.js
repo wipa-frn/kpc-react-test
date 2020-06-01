@@ -1,10 +1,12 @@
 import React from 'react';
-import { useSelector} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import {Table,Form,Button,Pagination} from 'react-bootstrap'
-// import { createPersonal } from '../actions/crud'
+import { deletePersonal } from '../actions/crud'
 
 const TableData = () => {
   const personals = useSelector(state => state.personals) 
+  const dispatch = useDispatch();
+
   console.log(personals,'table')
 
   return ( 
@@ -57,7 +59,7 @@ const TableData = () => {
                   <td>{ person.mobilePhone }</td>
                   <td className="text-right">
                     <a id={`edit-${index}`} className="mr-1" href="#edit">EDIT</a>/
-                    <a id={`delete-${index}`} className="ml-1"href="#delete">DELETE</a>
+                    <a id={`delete-${index}`} className="ml-1"href="#delete" onClick={() => dispatch(deletePersonal(person.id)) }>DELETE</a>
                   </td>
                 </tr>
               )
