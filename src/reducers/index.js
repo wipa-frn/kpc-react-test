@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 import personals from './personals'
+import initialPersonal from './initialPersonal'
 
 const allReducers = combineReducers({
-  personals
+  personals,
+  initialPersonal
 })
 
 // function crudApp(state = {}, action) {

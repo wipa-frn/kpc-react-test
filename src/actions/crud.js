@@ -1,4 +1,5 @@
 export const CREATE = 'CREATE'; 
+export const UPDATE = 'UPDATE'; 
 export const DELETE = 'DELETE'; 
 
 export const createPersonal = (personal) => {
@@ -8,6 +9,16 @@ export const createPersonal = (personal) => {
     personal: personal
   }
 }
+
+export const updatePersonal = (id, personal) => {
+  return {
+    type: UPDATE,
+    text: 'Update personal successfully',
+    id: id,
+    personal: personal
+  }
+}
+
 export const deletePersonal = (id) => {
   return {
     type: DELETE,

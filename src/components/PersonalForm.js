@@ -48,20 +48,8 @@ const createNewId = (personals) => {
 const PersonalForm = () => {
   const defaultData = getDefaultPersonal();
   const personals = useSelector(state => state.personals) 
+  const initialPersonal = useSelector(state => state.initialPersonal) 
   const dispatch = useDispatch();
-
-  const initialValues = {
-    title: defaultData.titles[0],
-    nationality: '',
-    gender: '',
-    citizenId:'',
-    passportNo: '',
-    firstName: '',
-    lastName: '',
-    birthDay: '',
-    mobilePhone: '',
-    expectedSalary: ''
-  }
   
   const handleSubmitForm = (value) => {
     //add id to personal object
@@ -82,7 +70,7 @@ const PersonalForm = () => {
           resetForm()
         }
       }
-      initialValues={initialValues}
+      initialValues={initialPersonal}
     >
       {({
         handleSubmit,
