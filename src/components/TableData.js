@@ -1,7 +1,14 @@
 import React from 'react';
 import {Table,Form,Button,Pagination} from 'react-bootstrap'
+import { useSelector} from 'react-redux'
+// import { createStore } from 'redux'
+// import crudApp from '../reducers/crud'
+// import { createPersonal } from '../actions/crud'
 
-const TableData = (props) => {
+const TableData = () => {
+  const personals = useSelector(state => state.personals) 
+  console.log(personals,'table')
+
   return ( 
     <div className="table-data">
       <div className="d-flex justify-content-between my-2">

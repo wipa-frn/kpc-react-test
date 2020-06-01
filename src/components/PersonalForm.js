@@ -1,4 +1,5 @@
-import React,{useState} from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import { Formik } from 'formik';
 import { Form, Col, Button } from 'react-bootstrap'
 import * as yup from 'yup';
@@ -6,6 +7,7 @@ import DatePicker from './DatePicker'
 import MobilePhone from './MobilePhone'
 import CitizenId from './CitizenId'
 import { getDefaultPersonal } from '../datas/defaultPersonal'
+import { createPersonal } from '../actions/crud'
 
 const personalSchema = yup.object().shape({
   title:  yup.string(),
@@ -32,32 +34,59 @@ const personalSchema = yup.object().shape({
     .required('This field is required.'),
 });
 
-// const handleSubmitForm = values => {
-//   // event.preventDefault();
-//   console.log(values);
-// }
+const createNewId = (personals) => {
+  //create new personal id 
+  let newId = 0;
+
+  if(personals.length > 0){
+    newId = (personals[personals.length-1].id) + 1; 
+  }
+  return newId;
+} 
+
 
 const PersonalForm = () => {
   const defaultData = getDefaultPersonal();
-  const [personalData , setPersonalData] = useState({})
+  const personals = useSelector(state => state.personals) 
+  const dispatch = useDispatch();
+
+  const initialValues = {
+    title: defaultData.titles[0],
+    nationality: '',
+    gender: '',
+    citizenId:'',
+    passportNo: '',
+    firstName: '',
+    lastName: '',
+    birthDay: '',
+    mobilePhone: '',
+    expectedSalary: ''
+  }
+  
+  const handleSubmitForm = (value) => {
+    //add id to personal object
+    value = {
+      ...value, 
+      id: createNewId(personals),
+      expectedSalary: parseInt(value.expectedSalary)
+    }
+    //add personal object to store 'personals'
+    dispatch(createPersonal(value))
+  }
 
   return ( 
     <Formik
       validationSchema={personalSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        console.log(values)
-        setPersonalData(values)
-      }}
-      initialValues={{
-        title: defaultData.titles[0],
-        nationality: '',
-        gender: '',
-        citizenId:'',
-        passportNo: '',
-      }}
+      onSubmit={(value, { resetForm }) => {
+          handleSubmitForm(value)
+          resetForm()
+        }
+      }
+      initialValues={initialValues}
     >
       {({
         handleSubmit,
+        resetForm,
         handleChange,
         handleBlur,
         setFieldValue,
@@ -209,7 +238,7 @@ const PersonalForm = () => {
                 isInvalid={errors.passportNo}
               />
               {
-                isValid ? null : <Form.Control.Feedback type="invalid">{errors.passportNo}</Form.Control.Feedback>
+                !!errors.passportNo && <Form.Control.Feedback type="invalid">{errors.passportNo}</Form.Control.Feedback>
               }
             </div>
           </Form.Row>
@@ -223,7 +252,6 @@ const PersonalForm = () => {
                 name="expectedSalary"
                 value={values.expectedSalary}
                 onChange={handleChange}
-                isInvalid={errors.expectedSalary}
               />
               {
                 !!errors.expectedSalary && <Form.Control.Feedback type="invalid">{errors.expectedSalary}</Form.Control.Feedback>
