@@ -51,6 +51,7 @@ const PersonalForm = () => {
   const initialPersonal = useSelector(state => state.initialPersonal) 
   const dispatch = useDispatch();
   
+  console.log(initialPersonal,'initialPersonal')
   const handleSubmitForm = (value) => {
     //add id to personal object
     value = {
@@ -85,10 +86,11 @@ const PersonalForm = () => {
         errors,
       }) => (
         <Form 
-          className="personal-form shadow"
-          noValidate 
-          onSubmit={handleSubmit}
+        className="personal-form shadow"
+        noValidate 
+        onSubmit={handleSubmit}
         >
+        {console.log(values,'v')}
           <Form.Row>
             <Col xs={3} sm={2} lg={2}>                  
               <Form.Label className="required">Title:</Form.Label>
@@ -159,10 +161,17 @@ const PersonalForm = () => {
                   value={values.nationality}
                   onChange={handleChange}
                 >
-                  <option value="" >-- Please Select --</option>
+                  <option value="">-- Please Select --</option>
                   {
                     defaultData.nationalities.map((nationality,index) => {
-                      return <option value={nationality} key={'nationality-'+index}>{nationality}</option>
+                      return (
+                        <option 
+                          value={nationality} 
+                          key={'nationality-'+index} 
+                        >
+                          {nationality}
+                        </option>
+                      )
                     })
                   }
                 </Form.Control>

@@ -6,7 +6,7 @@ export default function initialPersonal (state = initialValues, action) {
     case DEFAULT:    
       return action.default
     case SELECTED:  
-      return action.person
+      return action.personal
     default:
       return state
   }

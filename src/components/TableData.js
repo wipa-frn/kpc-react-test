@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import {Table,Form,Button,Pagination} from 'react-bootstrap'
 import { updatePersonal, deletePersonal } from '../actions/crud'
-import { selectedPerson, defaultPerson } from '../actions/initialPersonal'
+import { selectedPerson } from '../actions/initialPersonal'
 
 const TableData = () => {
   const personals = useSelector(state => state.personals) 
