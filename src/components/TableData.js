@@ -17,13 +17,13 @@ const TableData = (props) => {
         </div>
         <div className="d-flex">
           <Pagination size="sm">
-            <Pagination.Prev />
+            <Pagination.Prev>PREV</Pagination.Prev>
             <Pagination.Item>{1}</Pagination.Item>
             <Pagination.Item>{2}</Pagination.Item>
             <Pagination.Item>{3}</Pagination.Item>
             <Pagination.Item active>{4}</Pagination.Item>
             <Pagination.Ellipsis />
-            <Pagination.Next />
+            <Pagination.Next>NEXT</Pagination.Next>
           </Pagination>
         </div>
       </div>
