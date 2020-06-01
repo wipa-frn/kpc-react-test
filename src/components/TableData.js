@@ -1,8 +1,6 @@
 import React from 'react';
-import {Table,Form,Button,Pagination} from 'react-bootstrap'
 import { useSelector} from 'react-redux'
-// import { createStore } from 'redux'
-// import crudApp from '../reducers/crud'
+import {Table,Form,Button,Pagination} from 'react-bootstrap'
 // import { createPersonal } from '../actions/crud'
 
 const TableData = () => {
@@ -43,35 +41,28 @@ const TableData = () => {
             <th>Gender</th>
             <th>Nationality</th>
             <th>MobilePhone</th>
-            <th></th>
-            {/* <th>Title</th> */}
-            {/* <th>Birthday</th> */}
-            {/* <th>CitizenID</th> */}
-            {/* <th>Passport</th> */}
-            {/* <th>Expected Salary</th> */}
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>  
-              <Form.Check
-                id="order-i"
-                custom
-                inline
-                label=""
-                type="checkbox"
-              />
-            </td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td className="text-right">
-              <a className="mr-1" href="#edit">EDIT</a>/
-              <a className="ml-1"href="#delete">DELETE</a>
-            </td>
-          
-          </tr>
+          {
+            personals.map((person, index) =>{
+              return (
+                <tr key={index}>
+                  <td>  
+                    <Form.Check id={`order-${index}`} custom inline label="" type="checkbox"/>
+                  </td>
+                  <td>{ `${person.firstName} ${person.lastName}` }</td>
+                  <td>{ person.gender }</td>
+                  <td>{ person.nationality }</td>
+                  <td>{ person.mobilePhone }</td>
+                  <td className="text-right">
+                    <a id={`edit-${index}`} className="mr-1" href="#edit">EDIT</a>/
+                    <a id={`delete-${index}`} className="ml-1"href="#delete">DELETE</a>
+                  </td>
+                </tr>
+              )
+            })
+          }
         </tbody>
       </Table>
     </div>
