@@ -1,6 +1,7 @@
 export const CREATE = 'CREATE'; 
 export const UPDATE = 'UPDATE'; 
 export const DELETE = 'DELETE'; 
+export const DELETE_ALL = 'DELETE_ALL'; 
 
 export const createPersonal = (personal) => {
   return {
@@ -24,5 +25,13 @@ export const deletePersonal = (id) => {
     type: DELETE,
     text: 'Delete personal successfully',
     id: id
+  }
+}
+
+export const deleteWithSelectedPersonal = (idList) => {
+  return {
+    type: DELETE_ALL,
+    text: 'Delete all personal successfully',
+    idList: idList
   }
 }

@@ -51,7 +51,6 @@ const PersonalForm = () => {
   const initialPersonal = useSelector(state => state.initialPersonal) 
   const dispatch = useDispatch();
   
-  console.log(initialPersonal,'initialPersonal')
   const handleSubmitForm = (value) => {
     //add id to personal object
     value = {
@@ -90,7 +89,6 @@ const PersonalForm = () => {
         noValidate 
         onSubmit={handleSubmit}
         >
-        {console.log(values,'v')}
           <Form.Row>
             <Col xs={3} sm={2} lg={2}>                  
               <Form.Label className="required">Title:</Form.Label>

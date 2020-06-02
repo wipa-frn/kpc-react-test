@@ -1,14 +1,66 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import {Table,Form,Button,Pagination} from 'react-bootstrap'
-import { updatePersonal, deletePersonal } from '../actions/crud'
+import { updatePersonal, deletePersonal, deleteWithSelectedPersonal } from '../actions/crud'
 import { selectedPerson } from '../actions/initialPersonal'
+
+const initCheckboxItems = (personals, isChecked) => {
+  return personals.map(person => {
+    return {
+      id: person.id,
+      isChecked: isChecked,
+    }
+  })
+}
 
 const TableData = () => {
   const personals = useSelector(state => state.personals) 
   const dispatch = useDispatch();
+  const [isSelected, setIsSelected] = useState(false); 
+  const [checkboxItems, setCheckboxItems] = useState(initCheckboxItems(personals,false)); 
+  
+  const handleChangeCheckboxItem = (e, id) => {
+    const isChecked = e.target.checked;
 
-  console.log(personals,'table')
+    if(!isSelected){
+      const newState = checkboxItems.map(item => {
+        if(item.id === id) {
+          item.isChecked = isChecked;
+        }
+        return item;
+      })
+  
+      setCheckboxItems(newState);
+    }
+
+  }
+
+  const handleChangeSelectAll = (e) => {
+    const isChecked = e.target.checked;
+    if (isChecked){
+      setCheckboxItems(initCheckboxItems(personals,true));
+    }else{
+      setCheckboxItems(initCheckboxItems(personals,false));
+    }
+
+    setIsSelected(isChecked)
+  }
+
+  const handleDelete = () => {
+
+    const selectedIdList = []
+
+    checkboxItems.forEach(item => {
+      if(item.isChecked ){
+        selectedIdList.push(item.id)
+      }
+    });
+
+    dispatch(deleteWithSelectedPersonal(selectedIdList))
+    
+  }
+
+  // console.log(personals,'table')
 
   return ( 
     <div className="table-data">
@@ -20,8 +72,10 @@ const TableData = () => {
             inline
             label="Select All"
             type="checkbox"
+            checked={isSelected}
+            onChange= {(event) => handleChangeSelectAll(event)}
           />
-          <Button size="sm" variant="danger">DELETE</Button>
+          <Button size="sm" variant="danger" onClick={handleDelete}>DELETE</Button>
         </div>
         <div className="d-flex">
           <Pagination size="sm">
@@ -52,7 +106,22 @@ const TableData = () => {
               return (
                 <tr key={index}>
                   <td>  
-                    <Form.Check id={`order-${index}`} custom inline label="" type="checkbox"/>
+                    {
+                      checkboxItems.map(item => {
+                        if(item.id === person.id){
+                          return (
+                            <Form.Check 
+                              id={`order-${index}`} custom inline 
+                              label="" 
+                              type="checkbox" 
+                              checked={item.isChecked}
+                              onChange={(event) => { handleChangeCheckboxItem(event, person.id)}}
+                            />   
+                          )
+                        }
+                        return null
+                      })
+                    }
                   </td>
                   <td>{ `${person.firstName} ${person.lastName}` }</td>
                   <td>{ person.gender }</td>
