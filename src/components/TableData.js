@@ -90,7 +90,7 @@ const TableData = () => {
         </div>
       </div>
 
-      <Table responsive striped bordered hover variant="dark" >
+      <Table responsive striped bordered hover variant="dark" size="sm" >
         <thead>
           <tr>
             <th></th>
@@ -114,6 +114,7 @@ const TableData = () => {
                               id={`order-${index}`} custom inline 
                               label="" 
                               type="checkbox" 
+                              key={`order-${index}`}
                               checked={item.isChecked}
                               onChange={(event) => { handleChangeCheckboxItem(event, person.id)}}
                             />   
@@ -128,22 +129,24 @@ const TableData = () => {
                   <td>{ person.nationality }</td>
                   <td>{ person.mobilePhone }</td>
                   <td className="text-right">
-                    <a 
+                    <Button 
                       id={`edit-${index}`} 
                       className="mr-1" 
-                      href="#edit" 
+                      variant="link"
+                      size="sm"
                       onClick={() => dispatch(selectedPerson(person)) }
                     >
                       EDIT
-                    </a>
-                    <a 
+                    </Button>
+                    <Button 
                       id={`delete-${index}`} 
                       className="ml-1"
-                      href="#delete" 
+                      variant="link"
+                      size="sm"
                       onClick={() => dispatch(deletePersonal(person.id)) }
                     >
                       DELETE
-                    </a>
+                    </Button>
                   </td>
                 </tr>
               )

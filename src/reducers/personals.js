@@ -1,143 +1,16 @@
 import { CREATE, UPDATE, DELETE, DELETE_ALL } from '../actions/crud'
 
-const d = [
-  {
-    birthDay: 'Sun May 31 2020 00:00:00 GMT+0700 (เวลาอินโดจีน)',
-    citizenId: "1333333333333",
-    expectedSalary: 20000,
-    firstName: "วิภาวดี",
-    gender: "Female",
-    id: 1,
-    lastName: "ม่อนคุต",
-    mobilePhone: "6631653904",
-    nationality: "Albanian",
-    passportNo: "",
-    title: "Ms.",
-  },
-  {
-    birthDay: 'Sun May 31 2020 00:00:00 GMT+0700 (เวลาอินโดจีน)',
-    citizenId: "1333333333333",
-    expectedSalary: 20000,
-    firstName: "วิภาวดี",
-    gender: "Female",
-    id: 2,
-    lastName: "ม่อนคุต",
-    mobilePhone: "6631653904",
-    nationality: "Albanian",
-    passportNo: "",
-    title: "Ms.",
-  },
-  {
-    birthDay: 'Sun May 31 2020 00:00:00 GMT+0700 (เวลาอินโดจีน)',
-    citizenId: "1333333333333",
-    expectedSalary: 20000,
-    firstName: "วิภาวดี",
-    gender: "Female",
-    id: 3,
-    lastName: "ม่อนคุต",
-    mobilePhone: "6631653904",
-    nationality: "Albanian",
-    passportNo: "",
-    title: "Ms.",
-  },
-  {
-    birthDay: 'Sun May 31 2020 00:00:00 GMT+0700 (เวลาอินโดจีน)',
-    citizenId: "1333333333333",
-    expectedSalary: 20000,
-    firstName: "วิภาวดี",
-    gender: "Female",
-    id: 4,
-    lastName: "ม่อนคุต",
-    mobilePhone: "6631653904",
-    nationality: "Albanian",
-    passportNo: "",
-    title: "Ms.",
-  },
-  {
-    birthDay: 'Sun May 31 2020 00:00:00 GMT+0700 (เวลาอินโดจีน)',
-    citizenId: "1333333333333",
-    expectedSalary: 20000,
-    firstName: "วิภาวดี",
-    gender: "Female",
-    id: 5,
-    lastName: "ม่อนคุต",
-    mobilePhone: "6631653904",
-    nationality: "Albanian",
-    passportNo: "",
-    title: "Ms.",
-  },
-  {
-    birthDay: 'Sun May 31 2020 00:00:00 GMT+0700 (เวลาอินโดจีน)',
-    citizenId: "1333333333333",
-    expectedSalary: 20000,
-    firstName: "วิภาวดี",
-    gender: "Female",
-    id: 6,
-    lastName: "ม่อนคุต",
-    mobilePhone: "6631653904",
-    nationality: "Albanian",
-    passportNo: "",
-    title: "Ms.",
-  },
-  {
-    birthDay: 'Sun May 31 2020 00:00:00 GMT+0700 (เวลาอินโดจีน)',
-    citizenId: "1333333333333",
-    expectedSalary: 20000,
-    firstName: "วิภาวดี",
-    gender: "Female",
-    id: 7,
-    lastName: "ม่อนคุต",
-    mobilePhone: "6631653904",
-    nationality: "Albanian",
-    passportNo: "",
-    title: "Ms.",
-  },
-  {
-    birthDay: 'Sun May 31 2020 00:00:00 GMT+0700 (เวลาอินโดจีน)',
-    citizenId: "1333333333333",
-    expectedSalary: 20000,
-    firstName: "วิภาวดี",
-    gender: "Female",
-    id: 8,
-    lastName: "ม่อนคุต",
-    mobilePhone: "6631653904",
-    nationality: "Albanian",
-    passportNo: "",
-    title: "Ms.",
-  },
-  {
-    birthDay: 'Sun May 31 2020 00:00:00 GMT+0700 (เวลาอินโดจีน)',
-    citizenId: "1333333333333",
-    expectedSalary: 20000,
-    firstName: "วิภาวดี",
-    gender: "Female",
-    id: 9,
-    lastName: "ม่อนคุต",
-    mobilePhone: "6631653904",
-    nationality: "Albanian",
-    passportNo: "",
-    title: "Ms.",
-  },
-  {
-    birthDay: 'Sun May 31 2020 00:00:00 GMT+0700 (เวลาอินโดจีน)',
-    citizenId: "1333333333333",
-    expectedSalary: 20000,
-    firstName: "วิภาวดี",
-    gender: "Female",
-    id: 10,
-    lastName: "ม่อนคุต",
-    mobilePhone: "6631653904",
-    nationality: "Albanian",
-    passportNo: "",
-    title: "Ms.",
-  },
-]
+const defaultValue = () => {
+  const data = JSON.parse(localStorage.getItem('personals'));
+  return data;
+}
 
-export default function personals (state = d, action) {
+export default function personals (state = defaultValue(), action) {
   let newState = [];
   switch (action.type) {
     case CREATE:     //create person with props object
       newState = [...state,action.personal] 
+      localStorage.setItem('personals', JSON.stringify(newState))
       alert(action.text)
       return newState
 
@@ -156,6 +29,7 @@ export default function personals (state = d, action) {
       newState = state.filter((person) => {
         return person.id !== action.id
       })
+      localStorage.setItem('personals', JSON.stringify(newState))
       alert(action.text)
       return newState  
 
@@ -173,6 +47,7 @@ export default function personals (state = d, action) {
         })
       })
 
+      localStorage.setItem('personals', JSON.stringify(newState))
       alert(action.text)
       return newState  
 

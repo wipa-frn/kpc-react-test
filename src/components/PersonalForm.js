@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Formik } from 'formik';
 import { Form, Col, Button } from 'react-bootstrap'
@@ -51,7 +51,10 @@ const PersonalForm = () => {
   const initialPersonal = useSelector(state => state.initialPersonal) 
   const dispatch = useDispatch();
   
+  // const [isEditing, setIsEditing] = useState(false); 
+  
   const handleSubmitForm = (value) => {
+
     //add id to personal object
     value = {
       ...value, 
@@ -60,17 +63,20 @@ const PersonalForm = () => {
     }
     //add personal object to store 'personals'
     dispatch(createPersonal(value))
+    
   }
+
+  console.log(initialPersonal,'initialPersonal')
 
   return ( 
     <Formik
+      initialValues={initialPersonal}
       validationSchema={personalSchema}
       onSubmit={(value, { resetForm }) => {
           handleSubmitForm(value)
           resetForm()
         }
       }
-      initialValues={initialPersonal}
     >
       {({
         handleSubmit,
@@ -256,7 +262,8 @@ const PersonalForm = () => {
             <Form.Label>THB</Form.Label>
           </Form.Row>
                        
-          <div className="w-100 d-flex justify-content-end"><Button type="submit">Submit</Button></div>
+            {/* <div className="w-100 d-flex justify-content-end" ><Button type="submit">{isEditing ? 'Update' : 'Submit'}</Button></div> */}
+            <div className="w-100 d-flex justify-content-end" ><Button type="submit">Submit</Button></div>
         </Form>
       )}
     </Formik>

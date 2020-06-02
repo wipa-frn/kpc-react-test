@@ -5,6 +5,7 @@ export const SELECTED = 'SELECTED';
 
 const defaultTitle = getDefaultPersonal().titles[0];
 export const initialValues = {
+  id: -1,
   title: defaultTitle,
   nationality: '',
   gender: '',
