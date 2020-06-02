@@ -1,3 +1,21 @@
+export function getInitialFormValues() {
+  const initialValues = {
+    id: -1,
+    title: getDefaultPersonal().titles[0],
+    nationality: '',
+    gender: '',
+    citizenId:'',
+    passportNo: '',
+    firstName: '',
+    lastName: '',
+    birthDay: '',
+    mobilePhone: '',
+    expectedSalary: ''
+  }
+
+  return initialValues
+}
+
 export function getDefaultPersonal() {
   const defaultPersonal = {
     titles: ["Mr.", "Ms." ,"Mrs."],

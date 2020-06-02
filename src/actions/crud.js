@@ -11,11 +11,10 @@ export const createPersonal = (personal) => {
   }
 }
 
-export const updatePersonal = (id, personal) => {
+export const updatePersonal = (personal) => {
   return {
     type: UPDATE,
     text: 'Update personal successfully',
-    id: id,
     personal: personal
   }
 }

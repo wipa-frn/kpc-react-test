@@ -21,7 +21,7 @@ export const initialValues = {
 export const defaultPerson = () => {
   return {
     type: DEFAULT,
-    default: initialValues
+    default: null
   }
 }
 

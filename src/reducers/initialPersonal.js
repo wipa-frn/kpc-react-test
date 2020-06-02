@@ -1,7 +1,6 @@
-import { DEFAULT, SELECTED, initialValues } from '../actions/initialPersonal'
+import { DEFAULT, SELECTED } from '../actions/initialPersonal'
 
-export default function initialPersonal (state = initialValues, action) {
-
+export default function initialPersonal (state = null, action) {
   switch (action.type) {
     case DEFAULT:    
       return action.default

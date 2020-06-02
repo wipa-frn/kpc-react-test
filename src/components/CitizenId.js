@@ -14,6 +14,7 @@ const CitizenId = ({ name, onChange, errors}) => {
     onChange(name, newFields.join(''));
    
   }
+
   return ( 
     <div className="d-flex flex-wrap">
       <Form.Label>CitizenID:</Form.Label>

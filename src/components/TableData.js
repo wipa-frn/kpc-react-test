@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import {Table,Form,Button,Pagination} from 'react-bootstrap'
 import { updatePersonal, deletePersonal, deleteWithSelectedPersonal } from '../actions/crud'
@@ -18,6 +18,12 @@ const TableData = () => {
   const dispatch = useDispatch();
   const [isSelected, setIsSelected] = useState(false); 
   const [checkboxItems, setCheckboxItems] = useState(initCheckboxItems(personals,false)); 
+
+  useEffect(() => {
+    //update checkboxItems
+    setCheckboxItems(initCheckboxItems(personals,false))
+    
+  }, [personals]);
   
   const handleChangeCheckboxItem = (e, id) => {
     const isChecked = e.target.checked;
@@ -59,8 +65,6 @@ const TableData = () => {
     dispatch(deleteWithSelectedPersonal(selectedIdList))
     
   }
-
-  // console.log(personals,'table')
 
   return ( 
     <div className="table-data">

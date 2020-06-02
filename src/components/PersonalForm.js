@@ -1,38 +1,18 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Formik } from 'formik';
 import { Form, Col, Button } from 'react-bootstrap'
-import * as yup from 'yup';
+import { Formik } from 'formik';
 import DatePicker from './DatePicker'
 import MobilePhone from './MobilePhone'
 import CitizenId from './CitizenId'
-import { getDefaultPersonal } from '../datas/defaultPersonal'
-import { createPersonal } from '../actions/crud'
+import { getInitialFormValues, getDefaultPersonal } from '../datas/defaultPersonal'
+import { getPersonalSchema } from '../datas/validationSchema.js'
+import { createPersonal, updatePersonal } from '../actions/crud'
+import { defaultPerson } from '../actions/initialPersonal'
 
-const personalSchema = yup.object().shape({
-  title:  yup.string(),
-  firstName: yup.string()    
-    .min(2, 'This name is too short.')
-    .max(50, 'This name is too long.')
-    .required('This field is required.'),
-  lastName: yup.string()
-    .min(2, 'This name is too short.')
-    .max(50, 'This name is too long.')
-    .required('This field is required.'),
-  birthDay: yup.date()
-    .required('This field is required.'),
-  nationality: yup.string(),
-  citizenId: yup.string()
-    .matches(/[0-9]{13}$/i,'Consists of 13 digits.'),
-  gender: yup.string(),
-  mobilePhone: yup.string(),
-    // .matches(/[0-9]{11}$/i,'Consists of digits.'),
-    // .required('This field is required.'),
-  passportNo: yup.string(),
-  expectedSalary: yup.number()
-    .moreThan(0)
-    .required('This field is required.'),
-});
+const personalSchema = getPersonalSchema()
+const defaultData = getDefaultPersonal()
+const initialValues = getInitialFormValues()
 
 const createNewId = (personals) => {
   //create new personal id 
@@ -44,52 +24,70 @@ const createNewId = (personals) => {
   return newId;
 } 
 
+const updateFormat = (id, value) => {
+  return {
+    ...value, 
+    id: id,
+    expectedSalary: parseInt(value.expectedSalary)  //set formate
+  }
+}
 
 const PersonalForm = () => {
-  const defaultData = getDefaultPersonal();
+
   const personals = useSelector(state => state.personals) 
   const initialPersonal = useSelector(state => state.initialPersonal) 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+  const [isEditing, setIsEditing] = useState(false)
+  const [initialForm, setInitialForm] = useState(initialValues)
   
-  // const [isEditing, setIsEditing] = useState(false); 
-  
-  const handleSubmitForm = (value) => {
-
-    //add id to personal object
-    value = {
-      ...value, 
-      id: createNewId(personals),
-      expectedSalary: parseInt(value.expectedSalary)
+  useEffect(() => {
+    //this form is --> update or create  
+    if(initialPersonal !== null){
+      setInitialForm(initialPersonal)
+      setIsEditing(true)
+    }else{
+      setInitialForm(initialValues)
     }
-    //add personal object to store 'personals'
-    dispatch(createPersonal(value))
+    console.log(initialPersonal,'initialPersonal')
+    console.log(isEditing,'isEditing')
     
+  },[initialPersonal, isEditing]);
+
+  const handleSubmitForm = (value) => {
+    if(isEditing){
+      //update personal object to store 'personals'
+      value = updateFormat(value.id, value)
+      dispatch(updatePersonal(value))
+      dispatch(defaultPerson())
+      setInitialForm(initialValues)
+      setIsEditing(false)
+    }else{
+      //add personal object to store 'personals'
+      value = updateFormat(createNewId(personals), value)
+      dispatch(createPersonal(value))
+    }
   }
 
-  console.log(initialPersonal,'initialPersonal')
-
   return ( 
+    
     <Formik
-      initialValues={initialPersonal}
+      enableReinitialize={true}
+      initialValues={initialForm}
       validationSchema={personalSchema}
       onSubmit={(value, { resetForm }) => {
           handleSubmitForm(value)
-          resetForm()
+          resetForm(initialForm)
         }
       }
     >
-      {({
-        handleSubmit,
-        resetForm,
+      {({handleSubmit,
         handleChange,
-        handleBlur,
         setFieldValue,
-        isSubmitting,
         values,
-        touched,
-        isValid,
-        errors,
-      }) => (
+        errors
+      }) => {
+
+      return (
         <Form 
         className="personal-form shadow"
         noValidate 
@@ -134,7 +132,6 @@ const PersonalForm = () => {
                   name="lastName"
                   value={values.lastName}
                   onChange={handleChange}
-                  onBlur={handleBlur}
                   isInvalid={errors.lastName}
                 />
                 {
@@ -191,6 +188,7 @@ const PersonalForm = () => {
                 value={values.citizenId}
                 onChange={setFieldValue}
                 errors={errors}
+                values={values}
               />
             </div>
           </Form.Row>
@@ -252,7 +250,7 @@ const PersonalForm = () => {
                 placeholder="Expected salary"
                 name="expectedSalary"
                 value={values.expectedSalary}
-                onChange={handleChange}
+                onChange={(handleChange)}
                 isInvalid={errors.expectedSalary}
               />
               {
@@ -262,10 +260,9 @@ const PersonalForm = () => {
             <Form.Label>THB</Form.Label>
           </Form.Row>
                        
-            {/* <div className="w-100 d-flex justify-content-end" ><Button type="submit">{isEditing ? 'Update' : 'Submit'}</Button></div> */}
-            <div className="w-100 d-flex justify-content-end" ><Button type="submit">Submit</Button></div>
+            <div className="w-100 d-flex justify-content-end" ><Button type="submit">{isEditing ? 'Update' : 'Submit'}</Button></div>
         </Form>
-      )}
+      )}}
     </Formik>
    );
 }

@@ -16,12 +16,12 @@ export default function personals (state = defaultValue(), action) {
 
     case UPDATE:     //update person with props object
       newState = state.map((person) => {
-        if(person.id === action.id){
-          person = action.person
+        if(person.id === action.personal.id){
+          person = action.personal
         }
         return person  
       })
-      console.log(newState,'new')
+      localStorage.setItem('personals', JSON.stringify(newState))
       alert(action.text)
     return newState
 
