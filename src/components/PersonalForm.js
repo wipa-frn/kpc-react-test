@@ -247,6 +247,7 @@ const PersonalForm = () => {
                 name="expectedSalary"
                 value={values.expectedSalary}
                 onChange={handleChange}
+                isInvalid={errors.expectedSalary}
               />
               {
                 !!errors.expectedSalary && <Form.Control.Feedback type="invalid">{errors.expectedSalary}</Form.Control.Feedback>

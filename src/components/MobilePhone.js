@@ -11,7 +11,7 @@ const MobilePhone = ({ name, value, onChange, errors }) => {
       country={'th'}
       value={value}
       onChange={(val) => {
-        onChange(name, val);
+        onChange(name, '+' + val);
       }}
       // isValid={(inputNumber, country, countries) => {
       //   return countries.some((country) => {
