@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import {Table,Form,Button,Pagination} from 'react-bootstrap'
+import {useDispatch } from 'react-redux'
+import {Table,Form,Button} from 'react-bootstrap'
 import { deletePersonal, deleteWithSelectedPersonal } from '../actions/crud'
 import { selectedPerson } from '../actions/initialPersonal'
 
-const initCheckboxItems = (personals, isChecked) => {
+const initCheckboxItems = (personals = [], isChecked) => {
   return personals.map(person => {
     return {
       id: person.id,
@@ -13,11 +13,12 @@ const initCheckboxItems = (personals, isChecked) => {
   })
 }
 
-const TableData = () => {
-  const personals = useSelector(state => state.personals) 
+const TableData = (props) => {
+  const personals = props.currentPersonals;
+  const Pagination = props.Pagination;
   const dispatch = useDispatch();
   const [isSelected, setIsSelected] = useState(false); 
-  const [checkboxItems, setCheckboxItems] = useState(initCheckboxItems(personals,false)); 
+  const [checkboxItems, setCheckboxItems] = useState([]); 
 
   useEffect(() => {
     //update checkboxItems
@@ -82,15 +83,7 @@ const TableData = () => {
           <Button size="sm" variant="danger" onClick={handleDelete}>DELETE</Button>
         </div>
         <div className="d-flex">
-          <Pagination size="sm">
-            <Pagination.Prev>PREV</Pagination.Prev>
-            <Pagination.Item>{1}</Pagination.Item>
-            <Pagination.Item>{2}</Pagination.Item>
-            <Pagination.Item>{3}</Pagination.Item>
-            <Pagination.Item active>{4}</Pagination.Item>
-            <Pagination.Ellipsis />
-            <Pagination.Next>NEXT</Pagination.Next>
-          </Pagination>
+          <Pagination/>
         </div>
       </div>
 
