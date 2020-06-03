@@ -30,7 +30,7 @@ const CitizenId = ({ name, values, onChange, errors}) => {
             placeholder="x"
             name="citizenId1"
             maxLength="1" 
-            style={{ width: '35px'}}
+            style={{ width: '45px'}}
             value={values.citizenId1}
             onChange={event => handleOnChange(event, 1)}
           />
@@ -41,7 +41,7 @@ const CitizenId = ({ name, values, onChange, errors}) => {
             placeholder="xxxx"
             name="citizenId2"
             maxLength="4" 
-            style={{ width: '65px'}}
+            style={{ width: '75px'}}
             value={values.citizenId2}
             onChange={event => handleOnChange(event, 2)}
 
@@ -53,7 +53,7 @@ const CitizenId = ({ name, values, onChange, errors}) => {
             placeholder="xxxxx"
             name="citizenId3"
             maxLength="5" 
-            style={{ width: '80px'}}
+            style={{ width: '85px'}}
             value={values.citizenId3}
             onChange={event => handleOnChange(event, 3)}
 
@@ -65,7 +65,7 @@ const CitizenId = ({ name, values, onChange, errors}) => {
             placeholder="xx"
             name="citizenId4"
             maxLength="2" 
-            style={{ width: '45px'}}
+            style={{ width: '50px'}}
             value={values.citizenId4}
             onChange={event => handleOnChange(event, 4)}
 
@@ -77,7 +77,7 @@ const CitizenId = ({ name, values, onChange, errors}) => {
             placeholder="x"
             name="citizenId5"
             maxLength="1" 
-            style={{ width: '35px'}}
+            style={{ width: '40px'}}
             value={values.citizenId5}
             onChange={event => handleOnChange(event, 5)}
 
