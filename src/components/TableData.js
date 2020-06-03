@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import {Table,Form,Button,Pagination} from 'react-bootstrap'
-import { updatePersonal, deletePersonal, deleteWithSelectedPersonal } from '../actions/crud'
+import { deletePersonal, deleteWithSelectedPersonal } from '../actions/crud'
 import { selectedPerson } from '../actions/initialPersonal'
 
 const initCheckboxItems = (personals, isChecked) => {

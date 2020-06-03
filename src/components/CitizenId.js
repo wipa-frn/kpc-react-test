@@ -1,18 +1,22 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Form } from 'react-bootstrap'
 
-const CitizenId = ({ name, onChange, errors}) => {
+const CitizenId = ({ name, values, onChange, errors}) => {
 
-  const [fields , setFields] = useState([]);
-
-  const handleChange = (event, index) => {
+  const handleOnChange = (event, id) => {
     
-    let newFields = fields 
-    newFields[index] = event.target.value
-
-    setFields(newFields);
-    onChange(name, newFields.join(''));
-   
+    let updateCitizenId = '';
+    //combind string seperate fields
+    for (let index = 1; index <= 5; index++) {
+      if(index === id){
+        updateCitizenId += event.target.value
+      }else{
+        updateCitizenId += values[`${name}${index}`]
+      }
+    }
+    
+    onChange(`${name}${id}`, event.target.value)
+    onChange(`${name}`, updateCitizenId) 
   }
 
   return ( 
@@ -21,58 +25,62 @@ const CitizenId = ({ name, onChange, errors}) => {
       <div>
         <div className="d-flex">
           <Form.Control
-            className={`${!!errors.citizenId ? 'border border-danger' : ''}`}
+            className={!!errors.citizenId ? 'border border-danger' : ''}
             type="text"
             placeholder="x"
-            name="citizen-id-1"
+            name="citizenId1"
             maxLength="1" 
-            value={fields[0]}
-            onChange={ event => handleChange(event, 0)} 
             style={{ width: '35px'}}
+            value={values.citizenId1}
+            onChange={event => handleOnChange(event, 1)}
           />
           <Form.Label> - </Form.Label>
           <Form.Control
-            className={`${!!errors.citizenId ? 'border border-danger' : ''}`}
+            className={!!errors.citizenId ? 'border border-danger' : ''}
             type="text"
             placeholder="xxxx"
-            name="citizen-id-2"
+            name="citizenId2"
             maxLength="4" 
-            value={fields[1]}
-            onChange={ event => handleChange(event, 1)}
             style={{ width: '65px'}}
+            value={values.citizenId2}
+            onChange={event => handleOnChange(event, 2)}
+
           />
           <Form.Label> - </Form.Label>
           <Form.Control
-            className={`${!!errors.citizenId ? 'border border-danger' : ''}`}
+            className={!!errors.citizenId ? 'border border-danger' : ''}
             type="text"
             placeholder="xxxxx"
-            name="citizen-id-3"
+            name="citizenId3"
             maxLength="5" 
-            value={fields[2]}
-            onChange={ event => handleChange(event, 2)}
             style={{ width: '80px'}}
+            value={values.citizenId3}
+            onChange={event => handleOnChange(event, 3)}
+
           />
           <Form.Label> - </Form.Label>
           <Form.Control
-            className={`${!!errors.citizenId ? 'border border-danger' : ''}`}
+            className={!!errors.citizenId ? 'border border-danger' : ''}
             type="text"
             placeholder="xx"
-            name="citizen-id-4"
+            name="citizenId4"
             maxLength="2" 
-            value={fields[3]}
-            onChange={ event => handleChange(event, 3)}
             style={{ width: '45px'}}
+            value={values.citizenId4}
+            onChange={event => handleOnChange(event, 4)}
+
           />
           <Form.Label> - </Form.Label>
           <Form.Control
-            className={`${!!errors.citizenId ? 'border border-danger' : ''}`}
+            className={!!errors.citizenId ? 'border border-danger' : ''}
             type="text"
             placeholder="x"
-            name="citizen-id-5"
+            name="citizenId5"
             maxLength="1" 
-            value={fields[4]}
-            onChange={ event => handleChange(event, 4)}
             style={{ width: '35px'}}
+            value={values.citizenId5}
+            onChange={event => handleOnChange(event, 5)}
+
           />
         </div>
       

@@ -16,10 +16,20 @@ export function getPersonalSchema(){
     nationality: yup.string(),
     citizenId: yup.string()
       .matches(/[0-9]{13}$/i,'Consists of 13 digits.'),
+    citizenId1: yup.string()
+    .matches(/[0-9]{1}$/i,'Consists of 13 digits.'),
+    citizenId2: yup.string()
+    .matches(/[0-9]{4}$/i,'Consists of 13 digits.'),
+    citizenId3: yup.string()
+    .matches(/[0-9]{5}$/i,'Consists of 13 digits.'),
+    citizenId4: yup.string()
+    .matches(/[0-9]{2}$/i,'Consists of 13 digits.'),
+    citizenId5: yup.string()
+    .matches(/[0-9]{1}$/i,'Consists of 13 digits.'),
     gender: yup.string(),
-    mobilePhone: yup.string(),
-      // .matches(/[0-9]{11}$/i,'Consists of digits.'),
-      // .required('This field is required.'),
+    mobilePhone: yup.string()
+      .matches(/^[+]$/i,'Consists of digits.')
+      .required('This field is required.'),
     passportNo: yup.string(),
     expectedSalary: yup.number()
       .moreThan(0)

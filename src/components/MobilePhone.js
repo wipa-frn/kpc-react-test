@@ -5,20 +5,25 @@ import 'react-phone-input-2/lib/style.css'
 
 const MobilePhone = ({ name, value, onChange, errors }) => {
   return ( 
-    <PhoneInput
-      // inputStyle={{borderColor: `{${!!errors.mobilePhone ? '#dc3545' : 'blue'}`}}
-      // buttonStyle={{borderColor: `{${!!errors.mobilePhone ? '#dc3545' : 'blue'}`}}
-      country={'th'}
-      value={value}
-      onChange={(val) => {
-        onChange(name, '+' + val);
-      }}
-      // isValid={(inputNumber, country, countries) => {
-      //   return countries.some((country) => {
-      //     return startsWith(inputNumber, country.dialCode) || startsWith(country.dialCode, inputNumber);
-      //   });
-      // }}
-    />
+    <div>
+      <PhoneInput
+        inputStyle={{borderColor: `${!!errors.mobilePhone ? '#dc3545' : ''}`}}
+        buttonStyle={{borderColor: `${!!errors.mobilePhone ? '#dc3545' : ''}`}}
+        country={'th'}
+        placeholder="Phone number"
+        value={value}
+        onChange={(val) => {onChange(name, '+' + val)}}
+        isInvalid={errors.mobilePhone}
+        // isValid={(inputNumber, country, countries) => {
+        //   return countries.some((country) => {
+        //     return startsWith(inputNumber, country.dialCode) || startsWith(country.dialCode, inputNumber);
+        //   });
+        // }}
+      />
+      {
+        !!errors.mobilePhone &&  <div className="invilid-text">{errors.mobilePhone}</div>
+      }
+    </div>
    );
 }
  

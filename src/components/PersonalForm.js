@@ -24,12 +24,30 @@ const createNewId = (personals) => {
   return newId;
 } 
 
-const updateFormat = (id, value) => {
+const addSeparateFeildCitizen = (person) => {
   return {
+    ...person,        
+    citizenId1: person.citizenId.substring(0, 1),
+    citizenId2: person.citizenId.substring(1, 5),
+    citizenId3: person.citizenId.substring(5, 10),
+    citizenId4: person.citizenId.substring(11, 13),
+    citizenId5: person.citizenId.substring(12)
+  }
+}
+const updateFormat = (id, value) => {
+  let result = {
     ...value, 
     id: id,
-    expectedSalary: parseInt(value.expectedSalary)  //set formate
+    expectedSalary: parseInt(value.expectedSalary), 
   }
+
+  //remove feild citizen
+  delete result.citizenId1
+  delete result.citizenId2
+  delete result.citizenId3
+  delete result.citizenId4
+  delete result.citizenId5
+  return result 
 }
 
 const PersonalForm = () => {
@@ -43,15 +61,13 @@ const PersonalForm = () => {
   useEffect(() => {
     //this form is --> update or create  
     if(initialPersonal !== null){
-      setInitialForm(initialPersonal)
+      setInitialForm(addSeparateFeildCitizen(initialPersonal))
       setIsEditing(true)
     }else{
       setInitialForm(initialValues)
     }
-    console.log(initialPersonal,'initialPersonal')
-    console.log(isEditing,'isEditing')
     
-  },[initialPersonal, isEditing]);
+  },[initialPersonal]);
 
   const handleSubmitForm = (value) => {
     if(isEditing){
@@ -86,7 +102,6 @@ const PersonalForm = () => {
         values,
         errors
       }) => {
-
       return (
         <Form 
         className="personal-form shadow"
@@ -117,6 +132,7 @@ const PersonalForm = () => {
               <Form.Control
                 type="text"
                 name="firstName"
+                placeholder="First Name"
                 value={values.firstName}
                 onChange={handleChange}
                 isInvalid={errors.firstName}
@@ -130,6 +146,7 @@ const PersonalForm = () => {
                 <Form.Control
                   type="text"
                   name="lastName"
+                  placeholder="Last Name"
                   value={values.lastName}
                   onChange={handleChange}
                   isInvalid={errors.lastName}
@@ -185,7 +202,6 @@ const PersonalForm = () => {
             <div>
               <CitizenId
                 name="citizenId"
-                value={values.citizenId}
                 onChange={setFieldValue}
                 errors={errors}
                 values={values}
