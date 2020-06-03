@@ -20,21 +20,21 @@ const CitizenId = ({ name, values, onChange, errors}) => {
   }
 
   return ( 
-    <div className="d-flex flex-wrap">
+    <div className="group-label flex-wrap">
       <Form.Label>CitizenID:</Form.Label>
       <div>
-        <div className="d-flex">
+        <div className="citizenId d-flex align-items-baseline">
           <Form.Control
             className={!!errors.citizenId ? 'border border-danger' : ''}
             type="text"
             placeholder="x"
             name="citizenId1"
             maxLength="1" 
-            style={{ width: '45px'}}
+            style={{ width: '40px'}}
             value={values.citizenId1}
             onChange={event => handleOnChange(event, 1)}
           />
-          <Form.Label> - </Form.Label>
+          <Form.Label>-</Form.Label>
           <Form.Control
             className={!!errors.citizenId ? 'border border-danger' : ''}
             type="text"
@@ -46,7 +46,7 @@ const CitizenId = ({ name, values, onChange, errors}) => {
             onChange={event => handleOnChange(event, 2)}
 
           />
-          <Form.Label> - </Form.Label>
+          <Form.Label>-</Form.Label>
           <Form.Control
             className={!!errors.citizenId ? 'border border-danger' : ''}
             type="text"
@@ -58,7 +58,7 @@ const CitizenId = ({ name, values, onChange, errors}) => {
             onChange={event => handleOnChange(event, 3)}
 
           />
-          <Form.Label> - </Form.Label>
+          <Form.Label>-</Form.Label>
           <Form.Control
             className={!!errors.citizenId ? 'border border-danger' : ''}
             type="text"
@@ -70,7 +70,7 @@ const CitizenId = ({ name, values, onChange, errors}) => {
             onChange={event => handleOnChange(event, 4)}
 
           />
-          <Form.Label> - </Form.Label>
+          <Form.Label>-</Form.Label>
           <Form.Control
             className={!!errors.citizenId ? 'border border-danger' : ''}
             type="text"
@@ -80,10 +80,8 @@ const CitizenId = ({ name, values, onChange, errors}) => {
             style={{ width: '40px'}}
             value={values.citizenId5}
             onChange={event => handleOnChange(event, 5)}
-
           />
         </div>
-      
         {
           !!errors.citizenId && <div className="invilid-text">{errors.citizenId}</div>
         }

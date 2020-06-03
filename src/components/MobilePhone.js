@@ -4,7 +4,7 @@ import 'react-phone-input-2/lib/style.css'
 
 const MobilePhone = ({ name, value, onChange, errors }) => {
   return ( 
-    <div>
+    <div className="flex-fill">
       <PhoneInput
         inputClass="phone-input"
         inputStyle={{borderColor: `${!!errors.mobilePhone ? '#dc3545' : ''}`}}

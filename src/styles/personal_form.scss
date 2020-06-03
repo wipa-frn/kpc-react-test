@@ -5,24 +5,35 @@ $charcoal : #555555;
   padding: 15px;
   border-radius: 15px;
   margin: 0 0 1rem 0;
-  // width: 80%;
-  .form-row{
-    margin: 0 0 1rem 0;
-    label{
-      margin: 5px;
+  
+  .row {
+    margin: 1rem 0 1rem 0;
+
+    .invilid-text {
+      width: 100%;
+      margin-top: 0.25rem;
+      font-size: 80%;
+      color: $red;
+    }
+  
+    .phone-input{
+      font-family: 'Mitr', sans-serif;
+      color: $charcoal;
+    }
+  
+    .group-label{
+      display: flex;
+      label{
+        margin-right: 5px;
+      }
+    }
+
+    .citizenId {
+      label {
+        margin-left: 5px;
+      }
     }
   }
 
-  .invilid-text {
-    width: 100%;
-    margin-top: 0.25rem;
-    font-size: 80%;
-    color: $red;
-  }
-
-  .phone-input{
-    font-family: 'Mitr', sans-serif;
-    color: $charcoal;
-  }
 
 }
