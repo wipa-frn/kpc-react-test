@@ -68,9 +68,9 @@ const TableData = (props) => {
   }
 
   return ( 
-    <div className="table-data">
-      <div className="d-flex flex-wrap justify-content-between my-2">
-        <div className="d-flex align-items-start" >
+    <div>
+      <div className="d-flex flex-wrap justify-content-between">
+        <div className="d-flex align-items-start my-2" >
           <Form.Check
             id="select-all"
             custom
@@ -82,76 +82,78 @@ const TableData = (props) => {
           />
           <Button size="sm" variant="danger" onClick={handleDelete}>DELETE</Button>
         </div>
-        <div className="d-flex">
+        <div className="d-flex my-2">
           <Pagination/>
         </div>
       </div>
 
-      <Table responsive striped bordered hover variant="dark" size="sm" >
-        <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Nationality</th>
-            <th>Mobile&nbsp;Phone</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            personals.map((person, index) =>{
-              return (
-                <tr key={index}>
-                  <td className="text-center">  
-                    {
-                      checkboxItems.map(item => {
-                        if(item.id === person.id){
-                          return (
-                            <Form.Check 
-                              id={`order-${index}`} custom inline 
-                              className="m-0"
-                              label="" 
-                              type="checkbox" 
-                              key={`order-${index}`}
-                              checked={item.isChecked}
-                              onChange={(event) => { handleChangeCheckboxItem(event, person.id)}}
-                            />   
-                          )
-                        }
-                        return null
-                      })
-                    }
-                  </td>
-                  <td>{ `${person.firstName} ${person.lastName}` }</td>
-                  <td>{ person.gender }</td>
-                  <td>{ person.nationality }</td>
-                  <td>{ person.mobilePhone }</td>
-                  <td className="text-right">
-                    <Button 
-                      id={`edit-${index}`} 
-                      className="mr-1" 
-                      variant="link"
-                      size="sm"
-                      onClick={() => dispatch(selectedPerson(person)) }
-                    >
-                      EDIT
-                    </Button>
-                    <Button 
-                      id={`delete-${index}`} 
-                      className="ml-1"
-                      variant="link"
-                      size="sm"
-                      onClick={() => dispatch(deletePersonal(person.id)) }
-                    >
-                      DELETE
-                    </Button>
-                  </td>
-                </tr>
-              )
-            })
-          }
-        </tbody>
-      </Table>
+      <div>
+        <Table responsive striped bordered hover variant="dark" size="sm" >
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Nationality</th>
+              <th>Mobile&nbsp;Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              personals.map((person, index) =>{
+                return (
+                  <tr key={index}>
+                    <td className="text-center">  
+                      {
+                        checkboxItems.map(item => {
+                          if(item.id === person.id){
+                            return (
+                              <Form.Check 
+                                id={`order-${index}`} custom inline 
+                                className="m-0"
+                                label="" 
+                                type="checkbox" 
+                                key={`order-${index}`}
+                                checked={item.isChecked}
+                                onChange={(event) => { handleChangeCheckboxItem(event, person.id)}}
+                              />   
+                            )
+                          }
+                          return null
+                        })
+                      }
+                    </td>
+                    <td>{ `${person.firstName} ${person.lastName}` }</td>
+                    <td>{ person.gender }</td>
+                    <td>{ person.nationality }</td>
+                    <td>{ person.mobilePhone }</td>
+                    <td className="text-right">
+                      <Button 
+                        id={`edit-${index}`} 
+                        className="mr-1" 
+                        variant="link"
+                        size="sm"
+                        onClick={() => dispatch(selectedPerson(person)) }
+                      >
+                        EDIT
+                      </Button>
+                      <Button 
+                        id={`delete-${index}`} 
+                        className="ml-1"
+                        variant="link"
+                        size="sm"
+                        onClick={() => dispatch(deletePersonal(person.id)) }
+                      >
+                        DELETE
+                      </Button>
+                    </td>
+                  </tr>
+                )
+              })
+            }
+          </tbody>
+        </Table>
+      </div>
     </div>
 
    );

@@ -285,7 +285,7 @@ const PersonalForm = () => {
           </Row>
 
           <Row>
-            <Col xs={9} sm={8} md={7} lg={5}>
+            <Col xs={10} sm={9} md={7} lg={5}>
               <div className="group-label">
                 <Form.Label className="required">Expected&nbsp;Salary:</Form.Label>
                 <div className="d-flex align-items-baseline">
