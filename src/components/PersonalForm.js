@@ -101,6 +101,8 @@ const PersonalForm = () => {
         values,
         errors
       }) => {
+        console.log(values,'va')
+        console.log(errors,'err')
       return (
         <Form 
         className="personal-form shadow"
@@ -264,7 +266,7 @@ const PersonalForm = () => {
           </Row>
 
           <Row>
-            <Col xs={10} sm={9} md={6} lg={5}>
+            <Col xs={10} sm={9} md={7} lg={5}>
               <div className="group-label">
                 <Form.Label >Passport&nbsp;No:</Form.Label>
                 <div className="flex-fill">
@@ -285,24 +287,26 @@ const PersonalForm = () => {
           </Row>
 
           <Row>
-            <Col xs={9} sm={8} md={6} lg={5}>
+            <Col xs={9} sm={8} md={7} lg={5}>
               <div className="group-label">
                 <Form.Label className="required">Expected&nbsp;Salary:</Form.Label>
-                  <div className="d-flex flex-column flex-fill">
-                    <div className="d-flex align-items-baseline">
-                      <Form.Control
-                        type="text"
-                        placeholder="Expected salary"
-                        name="expectedSalary"
-                        value={values.expectedSalary}
-                        onChange={(handleChange)}
-                        isInvalid={errors.expectedSalary}
-                        />
-                      <Form.Label className="ml-2">THB</Form.Label>
-                    </div>
+                <div className="d-flex align-items-baseline">
+                  <div className="d-flex flex-column">
+                    <Form.Control
+                      type="text"
+                      placeholder="Expected salary"
+                      name="expectedSalary"
+                      value={values.expectedSalary}
+                      onChange={handleChange}
+                      isInvalid={errors.expectedSalary}
+                      />
                     {
                       !!errors.expectedSalary && <Form.Control.Feedback type="invalid">{errors.expectedSalary}</Form.Control.Feedback>
                     }
+
+                  </div>
+                  <Form.Label className="ml-2">THB</Form.Label>
+
                 </div>
               </div>
             </Col>

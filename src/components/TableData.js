@@ -69,7 +69,7 @@ const TableData = (props) => {
 
   return ( 
     <div className="table-data">
-      <div className="d-flex justify-content-between my-2">
+      <div className="d-flex flex-wrap justify-content-between my-2">
         <div className="d-flex align-items-start" >
           <Form.Check
             id="select-all"
@@ -94,7 +94,7 @@ const TableData = (props) => {
             <th>Name</th>
             <th>Gender</th>
             <th>Nationality</th>
-            <th>MobilePhone</th>
+            <th>Mobile&nbsp;Phone</th>
           </tr>
         </thead>
         <tbody>
@@ -102,13 +102,14 @@ const TableData = (props) => {
             personals.map((person, index) =>{
               return (
                 <tr key={index}>
-                  <td>  
+                  <td className="text-center">  
                     {
                       checkboxItems.map(item => {
                         if(item.id === person.id){
                           return (
                             <Form.Check 
                               id={`order-${index}`} custom inline 
+                              className="m-0"
                               label="" 
                               type="checkbox" 
                               key={`order-${index}`}
