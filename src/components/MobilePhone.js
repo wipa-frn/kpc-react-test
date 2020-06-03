@@ -6,6 +6,7 @@ const MobilePhone = ({ name, value, onChange, errors }) => {
   return ( 
     <div>
       <PhoneInput
+        inputClass="phone-input"
         inputStyle={{borderColor: `${!!errors.mobilePhone ? '#dc3545' : ''}`}}
         buttonStyle={{borderColor: `${!!errors.mobilePhone ? '#dc3545' : ''}`}}
         country={'th'}

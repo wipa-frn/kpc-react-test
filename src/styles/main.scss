@@ -4,6 +4,7 @@
 
 //variables
 $charcoal: #555555;
+$red: #dc3545;
 
 body {
   background: #9796f0;  /* fallback for old browsers */
@@ -16,6 +17,6 @@ body {
 .required {
   &:after {
     content: '*';
-    color: red;
+    color: $red;
   }
 }

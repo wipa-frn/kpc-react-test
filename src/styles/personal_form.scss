@@ -1,3 +1,5 @@
+$charcoal : #555555;
+
 .personal-form {
   background-color: rgba(lightgrey,0.4);
   padding: 15px;
@@ -15,7 +17,12 @@
     width: 100%;
     margin-top: 0.25rem;
     font-size: 80%;
-    color: #dc3545;
+    color: $red;
+  }
+
+  .phone-input{
+    font-family: 'Mitr', sans-serif;
+    color: $charcoal;
   }
 
 }
