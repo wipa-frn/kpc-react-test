@@ -64,7 +64,7 @@ const TableData = (props) => {
     });
 
     dispatch(deleteWithSelectedPersonal(selectedIdList))
-    
+    setIsSelected(false)
   }
 
   return ( 

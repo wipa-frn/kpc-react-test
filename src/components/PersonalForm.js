@@ -101,8 +101,6 @@ const PersonalForm = () => {
         values,
         errors
       }) => {
-        console.log(values,'va')
-        console.log(errors,'err')
       return (
         <Form 
         className="personal-form shadow"
